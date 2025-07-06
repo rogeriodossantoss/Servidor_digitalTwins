@@ -1,0 +1,51 @@
+<h2>📊 Histórico do Dashboard MQTT</h2>
+
+<h3>⚡ Corrente (Watts)</h3>
+<canvas id="grafico-corrente"></canvas>
+
+<h3>🌡️ Temperatura (°C)</h3>
+<canvas id="grafico-temperatura"></canvas>
+
+<h3>💡 Lâmpadas (1 = Ligado, 0 = Desligado)</h3>
+<canvas id="grafico-lampadas"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const corrente = {{{corrente}}};
+  const temperatura = {{{temperatura}}};
+  const lampadas = {{{lampadas}}};
+
+  const formatarDados = (dados) => ({
+    labels: dados.map(d => d.x),
+    datasets: [{
+      label: 'Valor',
+      data: dados.map(d => d.y),
+      borderColor: 'blue',
+      backgroundColor: 'lightblue',
+      fill: false,
+      tension: 0.1
+    }]
+  });
+
+  const criarGrafico = (canvasId, dados) => {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: formatarDados(dados),
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Tempo' }},
+          y: { title: { display: true, text: 'Valor' }}
+        }
+      }
+    });
+  };
+
+  criarGrafico('grafico-corrente', corrente);
+  criarGrafico('grafico-temperatura', temperatura);
+  criarGrafico('grafico-lampadas', lampadas);
+</script>

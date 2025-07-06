@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard MQTT</title>
+  <style>
+    .grafico-barra {
+      height: 20px;
+      background-color: #ddd;
+      margin-bottom: 8px;
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .barra {
+      height: 100%;
+      background-color: red;
+      text-align: right;
+      color: white;
+      padding-right: 5px;
+      transition: width 0.5s;
+    }
+    .barra-temp {
+      background-color: blue;
+    }
+    .status-lampada {
+      padding: 5px 10px;
+      margin-bottom: 5px;
+      display: inline-block;
+      color: white;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .ligado {
+      background-color: green;
+    }
+    .desligado {
+      background-color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h2>📈 Dashboard MQTT (HTML + MQTT.js)</h2>
+
+  <h3>⚡ Corrente x 120 (Watts)</h3>
+  <div class="grafico-barra">
+    <div id="barra-corrente" class="barra">0W</div>
+  </div>
+
+  <h3>🌡️ Temperatura (°C)</h3>
+  <div class="grafico-barra">
+    <div id="barra-temperatura" class="barra barra-temp">0°C</div>
+  </div>
+
+  <h3>💡 Lâmpadas</h3>
+  <div id="lampada1" class="status-lampada desligado">Lâmpada 1: desligado</div>
+  <div id="lampada2" class="status-lampada desligado">Lâmpada 2: desligado</div>
+
+  <!-- MQTT.js CDN -->
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script>
+    // Conectar ao broker MQTT (exemplo com test.mosquitto.org)
+    const client = mqtt.connect('wss://localhost:1883');
+
+    client.on('connect', () => {
+      console.log('✅ Conectado ao broker MQTT');
+      client.subscribe('corrente');
+      client.subscribe('temperatura');
+      client.subscribe('lampada1');
+      client.subscribe('lampada2');
+    });
+
+    client.on('message', (topic, message) => {
+      const valor = message.toString();
+      console.log(`📥 ${topic}: ${valor}`);
+
+      if (topic === 'corrente') {
+        const watts = parseFloat(valor * 120).toFixed(1);
+        const percent = Math.min((watts / 2400) * 100, 100); // limite de 2400W
+        const barra = document.getElementById('barra-corrente');
+        barra.style.width = percent + '%';
+        barra.textContent = `${watts}W`;
+      }
+
+      if (topic === 'temperatura') {
+        const temp = parseFloat(valor).toFixed(1);
+        const percent = Math.min((temp / 50) * 100, 100); // máximo 50°C
+        const barra = document.getElementById('barra-temperatura');
+        barra.style.width = percent + '%';
+        barra.textContent = `${temp}°C`;
+      }
+
+      if (topic === 'lampada1') {
+        const status = document.getElementById('lampada1');
+        status.textContent = `Lâmpada 1: ${valor}`;
+        status.className = 'status-lampada ' + (valor === 'ligado' ? 'ligado' : 'desligado');
+      }
+
+      if (topic === 'lampada2') {
+        const status = document.getElementById('lampada2');
+        status.textContent = `Lâmpada 2: ${valor}`;
+        status.className = 'status-lampada ' + (valor === 'ligado' ? 'ligado' : 'desligado');
+      }
+    });
+  </script>
+</body>
+</html>
