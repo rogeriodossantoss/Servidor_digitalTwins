@@ -69,7 +69,6 @@ http://localhost:3008/dashboard
 Ou via IP local para acesso remoto:
 ```
 http://192.168.X.X:3008/dashboard
-http://localhost:3008/dashboard
 ```
 
 ---
