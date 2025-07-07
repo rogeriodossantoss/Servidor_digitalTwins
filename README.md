@@ -77,7 +77,8 @@ http://localhost:3008/dashboard
 
 - O dashboard permite visualizar dados de sensores de **temperatura** e **corrente** em tempo real.
 - Controle remoto pode ser adicionado através de botões ou comandos MQTT.
-- Imagens/dashboard.jpeg
+- ![Logo da empresa](Imagens/dashboard.jpeg)
+  
 
 ---
 
