@@ -89,19 +89,34 @@ Altere conforme necessário para o endereço do seu broker.
 - Certifique-se de que o broker MQTT está ativo na rede.
 - Sensores devem estar enviando dados MQTT corretamente.
 - Porta 3008 deve estar liberada para acesso remoto na sua rede.
----
-# 📶 Guia: Conexão Wi-Fi Automática com ESP32 (MicroPython)
 
-Este código permite que o **ESP32** se conecte automaticamente à sua rede Wi-Fi durante o boot, utilizando MicroPython.
 ---
 # 🚀 Instalação Rápida do MicroPython no ESP32
 
 1️⃣ Baixe o firmware oficial:
-👉 [https://micropython.org/download/esp32/](https://micropython.org/download/esp32/)
-abaixo segue o arquivo de instalação
+👉 https://micropython.org/download/esp32/
 
-Este é um link de instrução : [pdf](Arquivos e_instrucoes/Guia_Instalacao_MicroPython_ESP32_Formatado.pdf)
+2️⃣ Instale o **esptool**:
+```bash
+pip install esptool
+```
+
+3️⃣ Apague a memória do ESP32:
+```bash
+esptool --port COMx erase_flash
+```
+
+4️⃣ Grave o firmware:
+```bash
+esptool --port COMx --baud 460800 write_flash 0x1000 nome-do-firmware.bin
+```
+
+✅ Pronto! Agora conecte seu ESP32 ao **Thonny IDE** ou outro editor compatível com MicroPython.
+
 ---
+# 📶 Guia: Conexão Wi-Fi Automática com ESP32 (MicroPython)
+
+Este código permite que o **ESP32** se conecte automaticamente à sua rede Wi-Fi durante o boot, utilizando MicroPython.
 
 ## 🔌 Arquivo: `boot.py`
 
