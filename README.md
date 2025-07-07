@@ -51,6 +51,7 @@ npm install express express-handlebars body-parser mqtt sequelize sqlite3
 - O arquivo do banco será gerado automaticamente: `mqtt_db.sqlite`
 
 Se desejar usar outro banco (MySQL, SQLSERVER), edite `config/sequelize.js`.
+- ![Logo da empresa](Imagens/Banco.jpeg)
 
 ---
 
