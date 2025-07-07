@@ -92,25 +92,13 @@ index.js ➔ mqtt.connect('mqtt://localhost')
 
 Altere conforme necessário para o endereço do seu broker.
 
----
 
-## 🔄 Enviando para o GitHub
-
-```bash
-git init
-git add .
-git commit -m "Primeiro commit do servidor MQTT"
-git remote add origin https://github.com/seu-usuario/seu-repositorio.git
-git push -u origin main
-```
-
----
 
 ## 📢 Observações
 
 - Certifique-se de que o broker MQTT está ativo na rede.
 - Sensores devem estar enviando dados MQTT corretamente.
-- Porta 3000 deve estar liberada para acesso remoto na sua rede.
+- Porta 3008 deve estar liberada para acesso remoto na sua rede.
 
 ---
 
