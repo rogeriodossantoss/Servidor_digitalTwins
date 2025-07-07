@@ -100,7 +100,7 @@ Este código permite que o **ESP32** se conecte automaticamente à sua rede Wi-F
 👉 [https://micropython.org/download/esp32/](https://micropython.org/download/esp32/)
 abaixo segue o arquivo de instalação
 
-- [pdf](Arquivos e instruções/Guia_Instalacao_MicroPython_ESP32_Formatado.pdf)
+Este é um link de instrução : [pdf](Arquivos e_instrucoes/Guia_Instalacao_MicroPython_ESP32_Formatado.pdf)
 ---
 
 ## 🔌 Arquivo: `boot.py`
